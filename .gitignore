@@ -29,10 +29,14 @@ dev-dist
 # Test / coverage output
 coverage
 
-# Local environment files
+# Local environment files (incl. .env.local, which holds a Vercel token).
+# .env.example stays committable as a template.
 .env
 .env.*
 !.env.example
+
+# Vercel project link (created by `vercel link`)
+.vercel
 
 # OS files
 Thumbs.db
