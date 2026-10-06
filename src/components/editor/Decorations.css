@@ -1,0 +1,88 @@
+/* Drawing layer: covers the photo; only catches input in Draw mode */
+.drawing-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+}
+
+.drawing-layer.is-active {
+  pointer-events: auto;
+  cursor: crosshair;
+  /* Stop the browser from scrolling or zooming while drawing */
+  touch-action: none;
+}
+
+/* Text and stickers */
+.overlay-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0.08em 0.2em;
+  border-radius: 4px;
+  /* Font family, line height and shadow are set inline from
+     constants/decorations.js so the export draws them identically */
+  white-space: pre;
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.overlay-item:active {
+  cursor: grabbing;
+}
+
+.overlay-item--sticker {
+  padding: 0.05em;
+}
+
+.overlay-item:focus-visible {
+  outline: none;
+}
+
+.overlay-item.is-selected {
+  outline: 1.5px dashed rgb(255 255 255 / 0.95);
+  outline-offset: 2px;
+  background: rgb(0 0 0 / 0.18);
+}
+
+/* While drawing, text and stickers let strokes pass through */
+.editor-stage.is-drawing .overlay-item {
+  pointer-events: none;
+}
+
+.overlay-item__delete {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #e5484d;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+}
+
+/* Invisible 44px hit area around the small badge for fingers */
+.overlay-item__delete::before {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+}
+
+.overlay-item__delete svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+}

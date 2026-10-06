@@ -1,0 +1,51 @@
+.number-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.number-field__label {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.number-field__box {
+  display: flex;
+  align-items: center;
+  height: var(--control-lg);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  transition: border-color var(--duration) var(--ease);
+}
+
+.number-field__box:focus-within {
+  border-color: var(--color-accent);
+}
+
+.number-field__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  /* 16px stops iOS Safari from zooming in on focus */
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.number-field__input:disabled {
+  cursor: not-allowed;
+}
+
+.number-field:has(:disabled) {
+  opacity: 0.4;
+}
+
+.number-field__suffix {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}

@@ -1,0 +1,177 @@
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.header-actions__group {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.header-actions__divider {
+  width: 1px;
+  height: 24px;
+  margin: 0 var(--space-1);
+  background: var(--color-border);
+}
+
+.header-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--control-md);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  font-size: var(--font-md);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    opacity var(--duration) var(--ease),
+    transform 100ms var(--ease);
+}
+
+.header-button svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-button:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.header-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.header-button:disabled {
+  opacity: 0.35;
+}
+
+/* Export: the main action, in the accent colour */
+.header-button--primary {
+  border-color: transparent;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.header-button--primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+/* Phone Before/After toggle: hidden until phones; lit while showing Before */
+.header-button--compare {
+  display: none;
+}
+
+.header-button--compare[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+/* Before / After switch */
+.header-compare .segmented {
+  padding: 2px;
+}
+
+.header-compare .segmented__option {
+  min-height: calc(var(--control-md) - 6px);
+  padding: 0 var(--space-3);
+  font-size: var(--font-sm);
+}
+
+/* Touch tablets: finger-sized Before / After */
+@media (pointer: coarse) {
+  .header-compare .segmented {
+    padding: 0;
+  }
+
+  .header-compare .segmented__option {
+    min-height: 44px;
+  }
+}
+
+/* Tablets and small laptops: icon-only history / reset, Export keeps its label */
+@media (max-width: 1023px) {
+  .header-button:not(.header-button--primary) {
+    width: var(--control-md);
+    padding: 0;
+  }
+
+  .header-button:not(.header-button--primary) .header-button__label {
+    display: none;
+  }
+}
+
+/* Small tablets: Upload becomes an icon to make room */
+@media (max-width: 767px) {
+  .header-actions .upload-button {
+    width: var(--control-md);
+    padding: 0;
+  }
+
+  .header-actions .upload-button__label {
+    display: none;
+  }
+}
+
+/* Phones: 44px controls; Before/After becomes one toggle button */
+@media (max-width: 599px) {
+  .header-actions {
+    gap: var(--space-1);
+  }
+
+  .header-actions__divider,
+  .header-compare {
+    display: none;
+  }
+
+  .header-button--compare {
+    display: inline-flex;
+  }
+
+  .header-actions .header-button,
+  .header-actions .upload-button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  /* Export keeps a short label where it fits */
+  .header-actions .header-button--primary {
+    width: auto;
+    padding: 0 var(--space-3);
+  }
+
+  .header-actions .header-button--primary .header-button__label {
+    display: inline;
+  }
+}
+
+/* Narrowest phones (320–359px): Export becomes an icon too */
+@media (max-width: 359px) {
+  .header-actions .header-button--primary {
+    width: 44px;
+    padding: 0;
+  }
+
+  .header-actions .header-button--primary .header-button__label {
+    display: none;
+  }
+}

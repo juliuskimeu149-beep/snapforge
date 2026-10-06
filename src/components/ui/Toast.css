@@ -1,0 +1,98 @@
+/* Sits at the bottom of the photo area, above the photo */
+.toast-region {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-4);
+  z-index: 20;
+  width: max-content;
+  max-width: calc(100% - 2 * var(--space-4));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-lg);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: rgb(32 32 39 / 0.94);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--font-md);
+  pointer-events: auto;
+  animation: toast-in 220ms var(--ease);
+}
+
+.toast--error {
+  border-color: #5a2a2d;
+  background: rgb(50 24 26 / 0.95);
+  color: var(--color-danger);
+}
+
+.toast__icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.toast--info .toast__icon {
+  color: var(--color-success);
+}
+
+.toast__message {
+  padding: var(--space-1) 0;
+  line-height: 1.35;
+}
+
+.toast__action,
+.toast__close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  min-width: var(--control-sm);
+  min-height: var(--control-sm);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  transition: background-color var(--duration) var(--ease);
+}
+
+.toast__action {
+  padding: 0 var(--space-3);
+  color: var(--color-accent-text);
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.toast__close {
+  color: var(--color-text-muted);
+}
+
+.toast__close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.toast__action:hover,
+.toast__close:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}

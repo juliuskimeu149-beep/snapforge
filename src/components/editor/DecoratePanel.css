@@ -1,0 +1,203 @@
+/* Add Text / Draw */
+.decorate-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.decorate-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-lg);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  font-size: var(--font-md);
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    transform 100ms var(--ease);
+}
+
+/* Narrow desktop sidebar: keep "Done Drawing" on one line */
+@media (min-width: 900px) {
+  .decorate-action {
+    gap: 6px;
+    padding: 0 var(--space-2);
+    font-size: var(--font-sm);
+  }
+}
+
+.decorate-action:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.decorate-action:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Draw mode on */
+.decorate-action[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+.decorate-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.decorate-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.decorate-hint {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-sm);
+  line-height: 1.4;
+}
+
+/* Controls for the selected item or the brush */
+.decorate-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  /* Leave room for the pinned section header when scrolled into view */
+  scroll-margin: 88px 0 var(--space-3);
+  animation: decorate-editor-in 180ms var(--ease);
+}
+
+.decorate-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.decorate-group__label {
+  font-size: var(--font-md);
+  font-weight: 500;
+}
+
+.decorate-text-input {
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  /* 16px stops iOS Safari from zooming in on focus */
+  font-size: 1rem;
+  line-height: 1.4;
+  resize: vertical;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.decorate-text-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.decorate-delete,
+.decorate-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-md);
+  border-radius: 999px;
+  font-size: var(--font-md);
+  font-weight: 500;
+  transition: background-color var(--duration) var(--ease);
+}
+
+.decorate-delete {
+  border: 1px solid var(--color-danger-bg);
+  background: transparent;
+  color: var(--color-danger);
+}
+
+.decorate-delete:hover {
+  background: var(--color-danger-bg);
+}
+
+.decorate-secondary {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+}
+
+.decorate-secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.decorate-secondary:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+/* Sticker picker */
+.sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-2);
+}
+
+/* Narrow phones: tighter gaps keep each sticker at least 44px */
+@media (max-width: 374px) {
+  .sticker-grid {
+    gap: var(--space-1);
+  }
+}
+
+.sticker-button {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition:
+    background-color var(--duration) var(--ease),
+    transform 100ms var(--ease);
+}
+
+.sticker-button:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.sticker-button:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.sticker-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+@keyframes decorate-editor-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}

@@ -1,0 +1,117 @@
+.editor-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-shrink: 0;
+  background: var(--color-surface);
+}
+
+.editor-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 60px;
+  padding: var(--space-2) var(--space-1);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color var(--duration) var(--ease);
+}
+
+.editor-tab:hover {
+  color: var(--color-text);
+}
+
+.editor-tab:focus-visible {
+  outline-offset: -4px;
+  border-radius: var(--radius-md);
+}
+
+.editor-tab__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  transition: background-color var(--duration) var(--ease);
+}
+
+.editor-tab svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.editor-tab[aria-selected='true'] {
+  color: var(--color-accent-text);
+}
+
+/* Active: pill behind the icon */
+.editor-tab[aria-selected='true'] .editor-tab__icon {
+  background: var(--color-accent-soft);
+}
+
+/* "This section has edits" */
+.editor-tab__dot {
+  position: absolute;
+  top: 2px;
+  right: 9px;
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-sizing: content-box;
+}
+
+/* Phones / tablets: bottom bar above the home indicator */
+@media (max-width: 899px) {
+  .editor-tabs {
+    order: 2;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+/* Desktop: tabs across the top of the sidebar with an underline */
+@media (min-width: 900px) {
+  .editor-tabs {
+    padding: 0 var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .editor-tab {
+    min-height: 64px;
+  }
+
+  .editor-tab::after {
+    content: '';
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transition: transform 200ms var(--ease);
+  }
+
+  .editor-tab[aria-selected='true']::after {
+    transform: scaleX(1);
+  }
+
+  .editor-tab[aria-selected='true'] .editor-tab__icon {
+    background: none;
+  }
+}

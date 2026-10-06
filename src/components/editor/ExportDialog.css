@@ -1,0 +1,226 @@
+.export-dialog {
+  width: min(420px, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-4));
+  overflow-y: auto;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.export-dialog[open] {
+  animation: export-dialog-in 180ms var(--ease);
+}
+
+.export-dialog::backdrop {
+  background: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.export-dialog__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.export-dialog__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.export-dialog__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.export-dialog__size {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.export-dialog__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.export-dialog__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.export-dialog__hint {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Keeps the layout steady when messages appear */
+.export-dialog__status:empty {
+  display: none;
+}
+
+.export-dialog__error,
+.export-dialog__success {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+}
+
+.export-dialog__error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.export-dialog__success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.export-dialog__success svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.export-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.export-dialog__cancel,
+.export-dialog__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color var(--duration) var(--ease);
+}
+
+.export-dialog__cancel {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+}
+
+.export-dialog__cancel:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.export-dialog__download {
+  min-width: 170px;
+  border: 1px solid transparent;
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.export-dialog__download:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.export-dialog__download svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.export-dialog__cancel:disabled,
+.export-dialog__download:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.export-dialog__cancel:focus-visible,
+.export-dialog__download:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.export-dialog__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgb(255 255 255 / 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: export-spin 0.7s linear infinite;
+}
+
+/* Phones: a bottom sheet with full-width buttons */
+@media (max-width: 480px) {
+  .export-dialog {
+    width: 100%;
+    max-width: none;
+    margin: auto 0 0;
+    border-width: 1px 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .export-dialog[open] {
+    animation-name: export-sheet-in;
+  }
+
+  .export-dialog__body {
+    padding: var(--space-6) var(--space-4)
+      calc(var(--space-4) + env(safe-area-inset-bottom));
+  }
+
+  .export-dialog__actions {
+    flex-direction: column-reverse;
+  }
+}
+
+@keyframes export-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes export-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes export-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .export-dialog[open] {
+    animation: none;
+  }
+
+  .export-dialog__spinner {
+    animation-duration: 1.6s;
+  }
+}

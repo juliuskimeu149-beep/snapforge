@@ -1,0 +1,117 @@
+.confirm-dialog {
+  width: min(400px, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-4));
+  padding: 0;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.confirm-dialog[open] {
+  animation: confirm-dialog-in 180ms var(--ease);
+}
+
+.confirm-dialog::backdrop {
+  background: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.confirm-dialog__body {
+  padding: var(--space-6);
+}
+
+.confirm-dialog__title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-lg);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.confirm-dialog__message {
+  margin: 0 0 var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--font-base);
+  line-height: 1.5;
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.confirm-dialog__cancel,
+.confirm-dialog__confirm {
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: var(--font-base);
+  transition:
+    background-color var(--duration) var(--ease),
+    transform 100ms var(--ease);
+}
+
+.confirm-dialog__cancel:active,
+.confirm-dialog__confirm:active {
+  transform: scale(0.97);
+}
+
+.confirm-dialog__cancel {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+}
+
+.confirm-dialog__cancel:hover {
+  background: var(--color-surface-hover);
+}
+
+.confirm-dialog__confirm {
+  border: 1px solid transparent;
+  background: var(--color-danger-solid);
+  color: #fff;
+}
+
+.confirm-dialog__confirm:hover {
+  background: var(--color-danger-solid-hover);
+}
+
+/* Phones: a bottom sheet with full-width buttons, like Export */
+@media (max-width: 480px) {
+  .confirm-dialog {
+    width: 100%;
+    max-width: none;
+    margin: auto 0 0;
+    border-width: 1px 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .confirm-dialog[open] {
+    animation-name: confirm-sheet-in;
+  }
+
+  .confirm-dialog__body {
+    padding: var(--space-6) var(--space-4)
+      calc(var(--space-4) + env(safe-area-inset-bottom));
+  }
+
+  .confirm-dialog__actions {
+    flex-direction: column-reverse;
+  }
+}
+
+@keyframes confirm-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes confirm-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}

@@ -1,0 +1,11 @@
+.adjust-panel__controls {
+  display: grid;
+  gap: var(--space-2) var(--space-6);
+}
+
+/* Mid-size screens with a bottom panel: two columns of sliders saves height */
+@media (min-width: 600px) and (max-width: 899px) {
+  .adjust-panel__controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
